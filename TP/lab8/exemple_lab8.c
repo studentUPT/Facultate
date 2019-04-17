@@ -12,7 +12,7 @@ void exemplu1() {
 	void(*pointer) (int x, int y);
 	pointer = &f1;
 	f1(100, 200);
-	//invocam prima functie prin intermediul folosind pointerul
+//invocam prima functie prin intermediul folosind pointerul
 	(*pointer) (300, 400);
 	//atribuim pointerului adresa celei dea doua functie 
 	pointer = &f2;
