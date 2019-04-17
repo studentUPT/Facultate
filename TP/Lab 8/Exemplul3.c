@@ -24,7 +24,6 @@ void dolar(void)
 int main(void)
 {
     int i;
-    /*Declaram un vector de pointeri la functie. */
     void (*p[4])(void);
     /*Initializam vectorul cu adresele celor patru functii.*/
     p[0] = &stea;
