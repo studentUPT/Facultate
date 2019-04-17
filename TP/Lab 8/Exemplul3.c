@@ -25,7 +25,6 @@ int main(void)
 {
     int i;
     void (*p[4])(void);
-    /*Initializam vectorul cu adresele celor patru functii.*/
     p[0] = &stea;
     p[1] = &plus;
     p[2] = &minus;
