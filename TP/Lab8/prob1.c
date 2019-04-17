@@ -2,15 +2,16 @@
 #include <stdlib.h>
 #include <math.h>
 
-double fsin(double x) {return sin(x);}
-double fcos(double x) {return cos(x);}
-double fsxc(double x) {return sin(x)*cos(x);}
-double fxx(double x) {return x*x;}
+ double fsin(double x) {return sin(x);}
+ double fcos(double x) {return cos(x);}
+ double fsxc(double x) {return sin(x)*cos(x);}
+ double fxx(double x) {return x*x;}
+
 void tab(double (*fptr)(double), int a,int b,int n)
 {
     double i;
-    for(i=a;i<=b;i+=abs(a-b)/(n-1))
-        printf("sin (%.4lf)= %.4lf\n", i, (*fptr)(i));
+    for(i=a;i<=b;i+=(double)abs(a-b)/(n-1))
+        printf("%.4lf => %.4lf\n", i, (*fptr)(i));
 }
 int main()
 {   int a,n,b;

@@ -5,13 +5,11 @@
 #include <string.h>
 
 void citeste(char ** nume, int * varsta) {
-    char s[50];
-    int nr = 0;
+    *nume = (char *) malloc(4 * sizeof(char));
     printf("Introduceti numele: ");
-    scanf("%40s", s);
+    scanf("%s", *nume);
     printf("Introduceti varsta: ");
-    scanf("%d", & nr);
-    * varsta = nr;
+    scanf("%d", &(*varsta));
 }
 void scrie(char * nume, int varsta) {
     printf("%s,%d\n", nume, varsta);
