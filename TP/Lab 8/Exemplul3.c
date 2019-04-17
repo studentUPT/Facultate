@@ -30,7 +30,7 @@ int main(void){
     for(i = 0; i < 4; i++)
     (*p[i]) ();
     /*Apelam functiile in ordine inversa, folosind din nou vectorul de functii.*/
-    for(i - 3; i >= 0; i--)
+    for(i = 3; i >= 0; i--)
     (*p[i]) ();
     return 0;
 }
