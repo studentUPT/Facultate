@@ -9,7 +9,7 @@ double fxx(double x) {return x*x;}
 void tab(double (*fptr)(double), int a,int b,int n)
 {
     double i;
-    for(i=a;i<=b;i+=abs(a-b)/(n-1))
+    for(i=a;i<=b;i+=(double)abs(a-b)/(n-1))
         printf("sin (%.4lf)= %.4lf\n", i, (*fptr)(i));
 }
 int main()
