@@ -182,7 +182,7 @@ pacient* pacient_stergere(pacient* rad) {
     pacient *q1, *q2;
     char nume_pac[DIM], pren_pac[DIM];
     printf("\nIntroduceti numele pacientului:"); scanf("%s", &nume_pac);
-    printf("\nIntroduceti prenumele pacientului:"); scanf("%s", &pren_pac);
+    printf("\nIntroduceti prenumele pacientului:");  scanf("%s", &pren_pac);
     if(pacient_cautare(rad, nume_pac, pren_pac) != NULL) {
         //
         for (q1 = q2 = rad; q1!=NULL && strcmp(q1->pacient_nume, nume_pac) || (q1!=NULL && strcmp(q1->pacient_nume, nume_pac) == 0 && strcmp(q1->pacient_prenume, pren_pac)); q2 = q2, q1 = q1->pacient_urm);
@@ -270,12 +270,13 @@ void actualizare(pacient* rad) {
     afect* q1;
     pacient* q2;
     FILE *f=NULL, *g=NULL;
-    f = fopen("pacienti.txt", "wt");
-    g = fopen("afectiuni.txt", "wt");
-    for (q2 = rad; q2 != NULL; q2 = q2->pacient_urm)
+    f = fopen("pacienti1.txt", "wt");
+    g = fopen("afectiuni1.txt", "wt");
+    for (q2 = rad; q2 != NULL; q2 = q2->pacient_urm) {
         fprintf(f, "%d %s %s %s %s %s \n", q2->pacient_nr, q2->pacient_nume, q2->pacient_prenume, q2->pacient_cnp, q2->pacient_data_nastere, q2->pacient_adresa);
         for (q1 = q2->pacient_afect; q1 != NULL; q1 = q1->afect_urm)
             fprintf(g, "%d %d %s %s \n", q2->pacient_nr, q1->afect_nr, q1->afect_nume, q1->afect_data_prezentare_medic);
+    }
     fclose(f); fclose(g);
     printf("\nDatele au fost actualizate cu succes in fisierele aferente!");
 }
@@ -283,17 +284,17 @@ int main()
 {
     pacient* lista = NULL;
     int opt;
-    printf("\n\nMeniu \n");
-	printf("\n1. Incarcare date din fisierele aferente ");
-	printf("\n2. Afisare pacienti in ordine alfabetica ");
-	printf("\n3. Afisare pacientilor ce sufera de o anumita afectiune ");
-	printf("\n4. Stergere pacient ");
-	printf("\n5. Adauga pacient, daca acesta nu se afla in datele incarcate ");
-	printf("\n6. Afisare pacienti dintr-o anumita perioada ");
-	printf("\n7. Incarcare date in fisierele aferente ");
-	printf("\n8. Iesire");
-	printf("\nIntroduceti optiunea : "); scanf("%d",&opt);
     do {
+        printf("\n\nMeniu \n");
+	    printf("\n1. Incarcare date din fisierele aferente ");
+        printf("\n2. Afisare pacienti in ordine alfabetica ");
+        printf("\n3. Afisare pacientilor ce sufera de o anumita afectiune ");
+        printf("\n4. Stergere pacient ");
+        printf("\n5. Adauga pacient, daca acesta nu se afla in datele incarcate ");
+        printf("\n6. Afisare pacienti dintr-o anumita perioada ");
+        printf("\n7. Incarcare date in fisierele aferente ");
+        printf("\n8. Iesire");
+        printf("\nIntroduceti optiunea : "); scanf("%d",&opt);
         if (opt==1) {
             if (lista == NULL) {
                 lista = pacient_citire(lista);
@@ -324,7 +325,6 @@ int main()
                 actualizare(lista);
             } else printf("\nNu au fost adaugati pacientii!");
         } else if (opt<1 && opt>8) printf("\nOptiunea este invalida!");
-        printf("\nIntroduceti optiunea : "); scanf("%d",&opt);
     } while(opt!=8);
     return 0;
 }
