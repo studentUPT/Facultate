@@ -1,13 +1,1 @@
 7 Antonescu Carmen 2940524023654 24.05.1994 str.Copos_nr.2_ap.2_Arad,Arad 
-12 Badau Ioana 2901230024963 30.12.1990 str.Blaga_nr.15_ap.12_Arad,Arad 
-13 Cristea Sebastian 1921025020364 25.10.1992 str.Zorilor_nr.14_ap.2_Arad,Arad 
-11 Florea Ciprian 1540625020165 25.06.1954 str.Macilor_nr.142_ap.14_Arad,Arad 
-6 Gavril Andreea 2590304020065 04.03.1959 str.Bega_nr.34_ap.1_Arad,Arad 
-4 Iordache Gabriel 1900914020458 14.09.1990 str.Clujului_nr.24_ap.1_Arad,Arad 
-10 Macovei Cristina 2930214020436 14.02.1993 str.Crinilor_nr.14_ap.3_Arad,Arad 
-9 Marian Andrei 1960504020123 04.05.1996 str.Oituz_nr.2_ap.8_Arad,Arad 
-1 Moldovan Maria 2750211060563 11.02.1975 str.Condurasilor_nr.43_ap.2_Arad.Arad 
-5 Olteanu Victor 1540216020142 16.02.1954 str.Sega_nr.5_ap.34_Arad,Arad 
-3 Popescu Daiana 2770415021365 15.04.1977 str.Miorita_nr.1_ap.5_Arad.Arad 
-8 Pravas Marian 1641104023665 04.11.1964 str.Gavra_nr.32_ap.5_Arad,Arad 
-2 Siclovan Adrian 1680417020589 28.04.1968 str.Oituz_nr.31._ap.5_Arad.Arad 

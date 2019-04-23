@@ -39,18 +39,22 @@ afect* afect_adaugare(afect *rad, int nr_af, char* nume_af, char* data_prez) { /
     //Adaugarea nodului nou folosind tehnica celor doi pointeri
     for (q1 = q2 = rad; q1 != NULL && strcmp(q1->afect_data_prezentare_medic, data_prez) == 1; q2 = q1, q1 = q1->afect_urm);
     if (q1 == q2) {
+        aux->afect_urm = rad;
+        rad = aux;
+    } else if (q1 != q2) {
+        q2->afect_urm = aux;
         aux->afect_urm = q1;
-        rad = aux;
+        return rad;
     } else {
-        q2->afect_urm = q1;
-        rad = aux;
+        aux->afect_urm = rad;
+        return aux;
     }
     return rad;
 }
 
 afect* afect_cautare(afect* rad, char* nume_af) { //Functie care cauta daca exista deja afectiunea
     afect* q;
-    for(q = rad; q != NULL && strcmp(q->afect_nume, nume_af);q=q->afect_urm);
+    for(q = rad; q != NULL && strcmp(q->afect_nume, nume_af); q = q->afect_urm);
     return q;
 }
 
@@ -67,13 +71,16 @@ pacient* pacient_adaugare(pacient *rad, int nr_pac, char* nume_pac, char* prenum
     strcpy(aux->pacient_data_nastere, data_nastere);
     aux->pacient_afect = NULL;
     //Adaugare folosind tehnica celor doi pointeri
-    for(q1 = q2 = rad; q1!=NULL && strcmp(q1->pacient_nume, nume_pac) == -1 || (q1 != NULL && strcmp(q1->pacient_nume, nume_pac) == 0 && strcmp(q1->pacient_prenume, prenume_pac) == -1); q2 = q1, q1 = q1->pacient_urm);
+    for(q1 = q2 = rad; q1 != NULL && strcmp(q1->pacient_nume, nume_pac) == -1 || (q1 != NULL && strcmp(q1->pacient_nume, nume_pac) == 0 && strcmp(q1->pacient_prenume, prenume_pac) == -1); q2 = q1, q1 = q1->pacient_urm);
     if (q1 == q2) {
-        aux->pacient_urm = q1;
+        aux->pacient_urm = rad;
         rad = aux;
-    } else {
+    } else if (q1 != q2) {
         q2->pacient_urm = aux;
         aux->pacient_urm = q1;
+    } else {
+        aux->pacient_urm = rad;
+        return aux;
     }
     return rad;
 }
@@ -81,7 +88,7 @@ pacient* pacient_adaugare(pacient *rad, int nr_pac, char* nume_pac, char* prenum
 pacient* pacient_cautare(pacient* rad, char* nume_pac, char *prenume_pac) { //Functie care cauta daca exista deja pacientul in lista
     pacient* q;
     //Se verifica daca nu exista numele sau daca exista numele, dar nu exista prenumele
-    for (q = rad; q!=NULL && strcmp(q->pacient_nume, nume_pac) || (q!=NULL && strcmp(q->pacient_nume, nume_pac) == 0 && strcmp(q->pacient_prenume, prenume_pac)); q = q->pacient_urm);
+    for (q = rad; (q != NULL && strcmp(q->pacient_nume, nume_pac)) || (q != NULL && (strcmp(q->pacient_nume, nume_pac) == 0) && strcmp(q->pacient_prenume, prenume_pac)); q = q->pacient_urm);
     //Returneaza NULL daca nu exista perechea (Nume Prenume) in lista
     return q;
 }
@@ -114,7 +121,7 @@ pacient* pacient_citire(pacient* rad) { //Functie care citeste un pacient si ii 
     pacient* q2; afect* q1;
     f = fopen("pacienti.txt", "rt");
     g = fopen("afectiuni.txt", "rt");
-    if (f!=NULL && g!=NULL) {
+    if (f != NULL && g != NULL) {
         fclose(g);
         while(!feof(f)) {
             //Citeste datele din fisierul "pacienti.txt"
@@ -168,7 +175,7 @@ void afisare_punct3(pacient* rad) {
     char nume_afec[DIM];
     printf("Dati numele afectiunii: "); scanf("%s", &nume_afec);
     //Se parcurge lista si se verifica daca una dintre afectiunile de care a suferit pacientul coincide cu cea citita de la tastatura
-    for (q2 = rad; q2!=NULL; q2 = q2->pacient_urm) {
+    for (q2 = rad; q2 != NULL; q2 = q2->pacient_urm) {
         q1 = q2->pacient_afect;
         if(afect_cautare(q1, nume_afec) != NULL)
             printf("\n - %s %s", q2->pacient_nume, q2->pacient_prenume);
@@ -184,14 +191,13 @@ pacient* pacient_stergere(pacient* rad) {
     printf("\nIntroduceti numele pacientului:"); scanf("%s", &nume_pac);
     printf("\nIntroduceti prenumele pacientului:");  scanf("%s", &pren_pac);
     if(pacient_cautare(rad, nume_pac, pren_pac) != NULL) {
-        //
-        for (q1 = q2 = rad; q1!=NULL && strcmp(q1->pacient_nume, nume_pac) || (q1!=NULL && strcmp(q1->pacient_nume, nume_pac) == 0 && strcmp(q1->pacient_prenume, pren_pac)); q2 = q2, q1 = q1->pacient_urm);
-        if(q1==q2) {
-            rad = rad->pacient_urm;
-        } else {
-            q2->pacient_urm = q1->pacient_urm;
+        for (q1 = q2 = rad; (q1 != NULL && strcmp(q1->pacient_nume, nume_pac)) || (q1 != NULL && (strcmp(q1->pacient_nume, nume_pac) == 0) && strcmp(q1->pacient_prenume, pren_pac)); q2 = q1, q1 = q1->pacient_urm);
+        if (q1 != NULL && (strcmp(q1->pacient_nume, nume_pac) == 0) && (strcmp(q1->pacient_prenume, pren_pac) == 0)) {
+            if (q1 != q2) 
+                q2->pacient_urm = q1->pacient_urm;
+            else rad = rad->pacient_urm;
+            free(q1);
         }
-        free(q1);
         printf("\nPacientul a fost sters!");
     } else printf("\nPacientul nu se afla in lista!");
     return rad;
@@ -237,8 +243,8 @@ pacient* pacient_tratare(pacient* rad) {
                     q1 = afect_adaugare(q1, nr_af, nume_af, data_prez_med);
                 } else printf("\nAfectiunea se afla deja in lista!\n");
             }
-            else if(opt!=2) printf("\nOptiunea nu este valida!\n");
-        } while(opt!=2);
+            else if(opt != 2) printf("\nOptiunea nu este valida!\n");
+        } while(opt !=2 );
         q2->pacient_afect = q1;
     }
     return rad;
@@ -294,37 +300,37 @@ int main()
         printf("\n6. Afisare pacienti dintr-o anumita perioada ");
         printf("\n7. Incarcare date in fisierele aferente ");
         printf("\n8. Iesire");
-        printf("\nIntroduceti optiunea : "); scanf("%d",&opt);
-        if (opt==1) {
+        printf("\nIntroduceti optiunea : "); scanf("%d", &opt);
+        if (opt == 1) {
             if (lista == NULL) {
                 lista = pacient_citire(lista);
                 if (lista != NULL) printf("\nPacientii au fost adaugati in lista!");
             } else printf("\nPacientii au mai fost incarcati o data!");
-        } else if (opt==2) {
-            if (lista!=NULL) 
+        } else if (opt == 2) {
+            if (lista != NULL) 
                 afisare_punct2(lista);
             else printf("\nNu au fost adaugati pacientii!");
-        } else if (opt==3) {
-            if (lista!=NULL) {
+        } else if (opt == 3) {
+            if (lista != NULL) {
                 afisare_punct3(lista);
             } else printf("\nNu au fost adaugati pacientii!");
-        } else if (opt==4) {
-            if (lista!=NULL) {
+        } else if (opt == 4) {
+            if (lista != NULL) {
                 lista = pacient_stergere(lista);
             } else printf("\nNu au fost adaugati pacientii!");
-        } else if (opt==5) {
-            if (lista!=NULL) {
+        } else if (opt == 5) {
+            if (lista != NULL) {
                 lista = pacient_tratare(lista);
             } else printf("\nNu au fost adaugati pacientii!");
-        } else if (opt==6) {
-            if (lista!=NULL) {
+        } else if (opt == 6) {
+            if (lista != NULL) {
                 afisare_punct6(lista);
             } else printf("\nNu au fost adaugati pacientii!");
-        } else if (opt==7) {
-            if (lista!=NULL) {
+        } else if (opt == 7) {
+            if (lista != NULL) {
                 actualizare(lista);
             } else printf("\nNu au fost adaugati pacientii!");
         } else if (opt<1 && opt>8) printf("\nOptiunea este invalida!");
-    } while(opt!=8);
+    } while(opt != 8);
     return 0;
 }
