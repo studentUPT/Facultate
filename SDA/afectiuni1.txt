@@ -3,7 +3,6 @@
 12 25 Bronsita 2011.05.24 
 12 21 IACRS 2007.04.19 
 13 26 Hipertensiune 2006.06.18 
-14 3 IACSA 2000.12.11 
 11 28 Viroza 2013.10.24 
 11 24 Palpitatii 2010.06.15 
 11 22 Gripa 2007.02.14 
