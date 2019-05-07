@@ -15,7 +15,6 @@ int main()
             fprintf(g, "\"%s\"", line);
             fprintf(g, "\n");
         }
-        fclose(f); fclose(g);
-    } else printf("Fisierul nu a fost deschis\n");
+        fclose(f); fclose(g);    } else printf("Fisierul nu a fost deschis\n");
     return 1;
 }
