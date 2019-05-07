@@ -1,0 +1,1 @@
+Punctele cele mai apropiat de origine sunt: (1,1), (-1,1), (1,0), 
