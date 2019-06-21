@@ -1,0 +1,4 @@
+sasa 21 1
+vasea 21 2
+igor 20 3
+dan 20 4
