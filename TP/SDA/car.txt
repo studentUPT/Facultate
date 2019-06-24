@@ -1,0 +1,8 @@
+Tesla S 1
+Tesla X 1
+Tesla E 1
+Tesla Y 1
+BMW 5 2
+BMW 3 1
+Ford mustang 3
+Ford shelbi 4

@@ -1,0 +1,6 @@
+moldova cricova mdtravel 150
+romania timisoara tmtravel 200
+ungaria budapesta hutravel 300
+ucraina kiev uatravel 250
+moldova milesti mici 200
+moldova chisinau pman 500

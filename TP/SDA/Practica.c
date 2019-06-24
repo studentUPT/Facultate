@@ -24,7 +24,7 @@ persoana *addnode(persoana *head, char *nume, int varsta, int id)
     aux->varsta=varsta;
     aux->id=id;
     aux->sublist=NULL;
-    for(q1=q2=head; q1!=NULL && q1->id>aux->id; q2=q1, q1=q1->next);
+    for(q1=q2=head; q1!=NULL && q1->id<aux->id; q2=q1, q1=q1->next);
     aux->next=q1;
     if(q1==q2)
         head=aux;
@@ -40,7 +40,7 @@ Data* addsubnode(Data *subhead, int zi, int luna, int an, int id){
     aux->luna=luna;
     aux->an=an;
     aux->id=id;
-    for(q1=q2=subhead; q1!=NULL && q1->an>aux->an; q2=q1, q1=q1->next);
+    for(q1=q2=subhead; q1!=NULL && q1->an<aux->an; q2=q1, q1=q1->next);
     aux->next=q1;
     if(q1==q2)
     subhead=aux;
@@ -80,7 +80,7 @@ persoana *read(persoana *head)
     int varsta, id=0;
     char nume[20];
     persoana *p;
-    Data *d;
+    Data *d=NULL;
     f=fopen("file.txt", "rt");
     if(!f){
         printf("Error file"); exit(1);
@@ -104,7 +104,7 @@ void show(persoana *head)
     persoana *q=head;
     while(q!=NULL)
     {
-        printf("\n============\nNume: %s\nVarsta: %d\nID: %d", q->nume, q->varsta, q->id);
+            printf("\n============\nNume: %s\nVarsta: %d\nID: %d", q->nume, q->varsta, q->id);
         d=q->sublist;
         while (d!=NULL)
         {
