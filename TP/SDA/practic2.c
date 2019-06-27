@@ -94,10 +94,10 @@ node* find=NULL;
             fscanf(f,"%s%s%d", prod, model, &id);
             find=search(head, prod);
             if(find==NULL){
-            head=addnode(head, prod, model, id);
+            find=addnode(head, prod, model, id);
             find=search(head, prod);
             }
-            subhead=readsubnode(subhead, id);
+            find->subnode=readsubnode(find->subnode, id);
 
         }
         fclose(f);
