@@ -177,6 +177,7 @@ int main() {
 	
 	head = deletenode(head, "sasa");
 	show(head);
+	
 	_getch();
 	return 0;
 
