@@ -175,9 +175,9 @@ int main() {
 	show(head);
 	printbyid(head, 1);
 	
-	head = deletenode(head, "sasa");
+	head = deletenode(head, "igor");
 	show(head);
-	
+
 	_getch();
 	return 0;
 
